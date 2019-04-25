@@ -35,13 +35,13 @@ With [daliMaster](https://) hat! As the name suggests, that hat transforms your 
 
 * Turn your Raspberry Pi™ on.
 
-### software stuff
+### Software stuff
 
 Enable I2C interface of your Raspberry Pi
 ```
 sudo raspi-config
 ```
-Select "Interfacing option"->"I2C"->"Yes" to enable the interface.
+Select "Interfacing option">"I2C">"Yes" to enable the interface.
 Then install the I2C utilities:
 ```
 sudo apt-get update
@@ -70,11 +70,13 @@ and you should see something like that:
 If you see '23' (I2C address 0x23), your [daliMaster](https://) is online: well done!
 
 
-* Connect Arduino™ to your computer.
+### Let's do something
 
-* Download this library and load **daliMaster/examples/serialControl.ino**
-
-* Now open serial monitor, select 115000 as baudrate and you should see:
+* Download this library and digit:
+```
+sudo python3 examples/shellControl/shellControl.py
+```
+* Remember: "sudo" is needed because you are trying to access system resources such as I2C. Now you should see something like that:
 ```
 daliMaster start..
 i2c master begin..
