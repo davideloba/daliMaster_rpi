@@ -1,10 +1,11 @@
-# serialControl.ino
+# shellControl.py
 
 Here there is a list of commands that you can send to your Raspberry Pi™ by shell in order to control daliMaster Hat.
 
 ## Getting started
 
-Launch *python3 shellControl.py* under *examples/shellControl* folder. Write your command and press return to send it. Remember that you can send up to 4 arguments each time. The program will echo the received command and if it is correct it will be execute.
+Launch *python3 shellControl.py* under *examples/shellControl* folder. Write your command and press return to send it. If you launch the program without arguments, it will show you all available options. Remember that you can send up to 4 arguments each time. The program will echo the received command and if it is correct it will be execute.
+
 ### Hello world
 ```
 daliMaster start..
@@ -15,6 +16,7 @@ device(0x23) is ready!
 **-a [new address]**  
 Set another I2C address to the daliMaster chip. Values of 128 and more are not accepted.
 ```
+python3 shellControl.py
 -a 24
 received cmd-> -a,24,,,
 setting 24 as new i2c address to lw14..
@@ -24,9 +26,10 @@ done.
 ### Read LW14 register
 **-r [register address]**
 
-Read LW14 register and echo result. See [LW14 datasheet](http://shop.codemercs.com/media/files_public/okutobbwyxn/LW14_Datasheet.pdf) for more details.
-* "status" : STATUS REGISTER  
+Read LW14 register and echo result. See [LW14 datasheet](http://shop.codemercs.com/media/files_public/okutobbwyxn/LW14_Datasheet.pdf) for more details. Available register to read are:
+* "status" :
 The status register is one byte that contains the bus status and command status flags:  
+bit
 7 - Bus Error Status *(0 = Bus OK, 1 = Bus fault)*  
 6 - Busy *(0 = ready, 1 = busy)*  
 5 - Overrun  
@@ -35,11 +38,10 @@ The status register is one byte that contains the bus status and command status 
 2 - Reply Timeframe (*< 22 Te since last command 1 or 2 Byte telegram received*)  
 1 - Two byte telegram received
 0 - One byte telegram received
-* "command" : COMMAND REGISTER  
+* "command" :
 The command register has two bytes which directly represent the DALI command. Please refer to the DALI specification for details on the commands.
-* "signature" : SIGNATURE REGISTER
+* "signature" :
 The signature register can be used to identify LW14 and get the revision information for the chips firmware.
-
 
 #### Register reading example
 In this example we will ask ballast its phisicaly minimun level and read the response.

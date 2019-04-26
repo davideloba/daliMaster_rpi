@@ -1,7 +1,8 @@
 # daliMaster
 
-This is a Phyton library to control your DALI lamps with the brand new [daliMaster](https://) hat, with built-in DALI bus power supply system. B:boom::boom:m!
-For the Arduino library see here.
+This is a Python3 library to control your DALI lamps with the brand new [daliMaster](https://) hat for Raspberry Pi™, with built-in DALI bus power supply system. B:boom::boom:m!
+
+Are you looking for Arduino™ library and shield? See [here](https://github.com/davideloba/daliMaster).
 
 ## Description
 
@@ -37,7 +38,7 @@ With [daliMaster](https://) hat! As the name suggests, that hat transforms your 
 
 ### Software stuff
 
-Enable I2C interface of your Raspberry Pi
+Enable I2C interface of your Raspberry Pi™
 ```
 sudo raspi-config
 ```
@@ -72,25 +73,25 @@ If you see '23' (I2C address 0x23), your [daliMaster](https://) is online: well 
 
 ### Let's do something
 
-* Download this library and digit:
+Download this library and digit:
 ```
 sudo python3 examples/shellControl/shellControl.py
 ```
-* Remember: "sudo" is needed because you are trying to access system resources such as I2C. Now you should see something like that:
+Remember: "sudo" is needed because you are trying to access system resources such as I2C. Now you should see something like that:
 ```
 daliMaster start..
 i2c master begin..
 device(0x23) is ready!
 ```
-* Well, write and send this command:
+Well, write and send this command:
 ```
 -d -b 0
 ```
-* If everything went well your lamps now are off. But we don't like darkness, so let's switch them on to the minimum:
+If everything went well your lamps now are off. But we don't like darkness, so let's switch them on to the minimum:
 ```
 -d -b 1
 ```
-* Cool! Let's push them to maximum:
+Cool! Let's push them to maximum:
 ```
 -d -b 254
 ```
@@ -98,19 +99,19 @@ Easy, isn't it? Now you can modulate all lamps from 0 up to 254 with those simpl
 
 ## Next
 
-See more informations about serial commands [here](/examples/serialControl/README.MD). See other examples to play with your lamps (I suggest to try [Pulse.ino](/examples/pulse)). See also the following links to know more about DALI and LW14, the chip from which the [daliMaster](https://www.ebay.it/itm/254085058149) is powered by.
+See more informations about shell commands [here](/examples/shellControl/README.MD). See other examples to play with your lamps (try [Pulse.py](/examples/pulse)). See also the following links to know more about DALI and LW14, the chip from which the [daliMaster](https://) is powered by.
 
 ## Useful links
 
 ### Raspberry Pi  and I2C Interface
 * [raspberry-projects.com](https://raspberry-projects.com/pi/programming-in-python/i2c-programming-in-python/using-the-i2c-interface-2)
 
-### LW14
-* [LW14 datasheet](https://www.codemercs.com/downloads/ledwarrior/LW14_Datasheet.pdf)
-
 ### DALI
 * [main commands](https://www.acmesystems.it/www_raspberry/openhab_dali/dali_commands.pdf)
 * DALI international standard (English/French) [60929 © IEC:2006](http://jnhb.fszjzx.com/upload/biaozhun/pdf/IEC60929Y2006.PDF)
+
+### LW14
+* [LW14 datasheet](https://www.codemercs.com/downloads/ledwarrior/LW14_Datasheet.pdf)
 
 ## Built With
 
@@ -118,11 +119,9 @@ See more informations about serial commands [here](/examples/serialControl/READM
 
 ## Versioning
 
-* v.1 First release 21/01/2018
+* v.1 First release April 2019
 
 ## Credits
-
-* **Code Mercenaries** - *Original Raspberry Pi library for LW14 Modules* - [LED-Warrior14](https://www.codemercs.com/en/software)
 
 see [credits.md](credits.md) file for details.
 
