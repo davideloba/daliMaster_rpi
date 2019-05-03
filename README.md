@@ -2,7 +2,7 @@
 
 This is a Python3 library to control your DALI lamps with the brand new [daliMaster](https://) hat for Raspberry Pi™, with built-in DALI bus power supply system. B:boom::boom:m!
 
-Are you looking for Arduino™ library and shield? See [here](https://github.com/davideloba/daliMaster).
+Are you looking for Arduino™ library and DALI shield? See [here](https://github.com/davideloba/daliMaster).
 
 ## Description
 
@@ -28,11 +28,11 @@ With [daliMaster](https://) hat! As the name suggests, that hat transforms your 
 
 * Make connections (you can find an example [here](https://))
   * Connect your lamps to their ballasts
-  * Connect your ballast to mains..be careful!
+  * Connect your ballasts to mains..be careful!
   * Connect your ballasts and [daliMaster](https://) hat to DALI bus
   * Connect your 24V DC power supply to mains and to [daliMaster](https://)..again, be careful!
 
-* If I'm right, now you should have all of lamps on.
+* If I'm right, now you should have all lamps on.
 
 * Turn your Raspberry Pi™ on.
 
@@ -47,10 +47,6 @@ Then install the I2C utilities:
 ```
 sudo apt-get update
 sudo apt-get install python3-smbus i2c-tools
-```
-Reboot your Raspberry
-```
-sudo reboot -h now
 ```
 Now digit
 ```
@@ -77,11 +73,12 @@ Download this library and digit:
 ```
 sudo python3 examples/shellControl/shellControl.py
 ```
-Remember: "sudo" is needed because you are trying to access system resources such as I2C. Now you should see something like that:
+Remember: "sudo" is needed because we are trying to access system resources such as I2C. Now you should see something like that:
 ```
-daliMaster start..
-i2c master begin..
-device(0x23) is ready!
+I2C DALI master(0x23) begin..
+PING I2C device 0x23..ok
+device 0x23 is ready
+Digit your command (press "Enter" to see all options):
 ```
 Well, write and send this command:
 ```
@@ -113,7 +110,7 @@ See more informations about shell commands [here](/examples/shellControl/README.
 ### LW14
 * [LW14 datasheet](https://www.codemercs.com/downloads/ledwarrior/LW14_Datasheet.pdf)
 
-## Built With
+## This library is built With
 
 * [Atom](https://atom.io/)
 

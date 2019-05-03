@@ -1,22 +1,11 @@
-# @Author: davide
-# @Date:   2018-02-17T14:40:26+01:00
-# @Last modified by:   davide
-# @Last modified time: 2019-04-25T19:05:53+02:00
-
-
 import dali
 import defines
 import smbus
 import time
 
-#______________________________public_________________________
-
-#bus: bus
-#device: i2c_addr
-#register: reg
-#setDevice: setAddress
 
 class daliMaster:
+
 
     def __init__(self) :
         self.__address = 0
@@ -28,16 +17,16 @@ class daliMaster:
             return defines.ERROR
 
 
-    def begin(self, address = defines.LW14_I2C_ADDRESS):
+    def begin(self, toSet = defines.LW14_I2C_ADDRESS):
 
         '''
         Initialize daliMaster and check if there is any
         responding device with that address online
         '''
 
-        print ("I2C DALI master({0}) begin..".format(hex(address)))
-
         try :
+            address = self.__checkAddress(toSet)
+            print ("I2C DALI master {0}({1}) begin..".format(address, hex(address)))
             self.checkRange(address, 1, 127)
             self.__address = address
             self.__ping()
@@ -48,11 +37,11 @@ class daliMaster:
             print ("I/O error({0}): {1}".format(e.errno, e.strerror))
             return defines.ERROR
         else:
-            print("device {0} is ready".format(hex(self.__address)))
+            print("Device {0}({1}) is ready".format(self.__address, hex(self.__address)))
             return True
 
 
-    def setNewAddress(self, address):
+    def setNewAddress(self, toSet):
 
         '''
         Save the new I2C address to the Address Register
@@ -60,12 +49,14 @@ class daliMaster:
         '''
 
         try:
+            address = self.__checkAddress(toSet)
             self.checkRange(address, 1, 127)
             data = [address, address ^ 0xFF] # the second byte must contain the value of the first byte XORed with $FF.
 
-            print(":{0:08b}".format(data[0]))
-            print(":{0:08b}".format(0xFF))
-            print(":{0:08b}".format(data[1]))
+            print("Setting {0}({1}) as new I2C address".format(address, hex(address)))
+            # print(":{0:08b}".format(data[0]))
+            # print(":{0:08b}".format(0xFF))
+            # print(":{0:08b}".format(data[1]))
 
             self.__i2cWrite(defines.LW14_REGISTERS["address"]["address"], data)
             time.sleep(1)
@@ -79,6 +70,7 @@ class daliMaster:
             return defines.ERROR
         else:
             return True
+
 
     def clean(self):
 
@@ -231,11 +223,14 @@ class daliMaster:
         else:
             return True
 
+
     def read(self, regName):
 
         try:
             regAddress = self.__getRegAddress(regName,"r")
             read = self.__i2cRead(regAddress)
+            if regName == "status" :
+                self.__printStatusReg(read)
         except ValueError as e:
             print(e.args)
             return defines.ERROR
@@ -269,7 +264,6 @@ class daliMaster:
 
 
     #Private
-
     def __ping(self, address = None) :
 
         '''
@@ -280,9 +274,19 @@ class daliMaster:
 
         if address == None :
             address = self.__address
-        print("PING I2C device {0}..".format(hex(address)), end = '')
+        print("Ping I2C device {0}({1})..".format(address, hex(address)), end = '')
         self.__bus.write_quick(address) #if it fails, will raise an IOError
         print("ok")
+
+
+    def __checkAddress(self, toSet) :
+
+        if isinstance(toSet, str) :
+            if not toSet.find("x") == -1  or not toSet.find("X") == -1 :
+                return int(toSet, 16)
+            else :
+                return int(toSet)
+        return toSet
 
 
     def __getRegAddress(self, name, mode, data = []) :
@@ -318,11 +322,11 @@ class daliMaster:
 
             if target == 0: #wait for zero
                 if status & first_mask == 0 and status & second_mask == 0:
-                    self.__printStatusReg(status)
+                    # self.__printStatusReg(status)
                     return True
             else: #wait for greater than zero
                 if status & first_mask > 0 and status & second_mask > 0:
-                    self.__printStatusReg(status)
+                    # self.__printStatusReg(status)
                     return True
 
         print("timeout!")
@@ -336,7 +340,6 @@ class daliMaster:
         data = [data_1, data_2] #2 byte dali telegram
         regAddress = self.__getRegAddress("command","w", data)
         return self.__i2cWrite(regAddress, data)
-
 
 
     def __writeTwice(self, data_1, data_2):
@@ -360,48 +363,11 @@ class daliMaster:
 
     def __printStatusReg(self, data):
 
-        # print("BUS\tBUSY\tOVER\tERR\tREPLY\tTIME\t2TEL\t1TEL")
-        print("status reg: {0}".format(bin(data)))
+        bits = ["1 BYTE TELEGRAM", "2 BYTE TELEGRAM", "REPLY TIMEFRAME", "VALID REPLY", "FRAM ERROR", "OVERRUN\t", "BUSY\t", "BUS FAULT"]
 
-
-    #     def printReg(self, register, addr):
-    #
-    #         try:
-    #             self.checkRegister(register, 'r')
-    #             print(hex(register)
-    #
-    #
-    # 	 switch(addr){
-    #
-    # 		 case LW14_REG_STATUS:
-    #
-    # 			 print(" Status reg"))
-    # 			 print(": "))
-    # 			 Serial.print(data[0])
-    # 			 print(" ->bits"))
-    # 			 this->printStatusBits(data[0])
-    #
-    # 			 break
-    #
-    # 		 case LW14_REG_CMD:
-    #
-    # 			 print(" Command reg: "))
-    # 				for(int i = 0 i < LW14_REG_CMD_LENGTH i++){
-    # 					Serial.print(data[i])
-    # 					Serial.print("..")
-    # 				}
-    #
-    # 			 break
-    #
-    # 		 case LW14_REG_SIGNATURE:
-    #
-    # 			 print(" Signature reg: "))
-    # 			 for(int i = 0 i < LW14_REG_SIGNATURE_LENGTH i++){
-    # 				 Serial.print(data[i])
-    # 				 print(".."))
-    # 			 }
-    # 			 print)
-    #
-    # 			 break
-    # 	 }
-    # }
+        for i in range(8, 0, -1) :
+            bit = data & (1 << (i-1))
+            if bit > 1 :
+                bit = 1
+            print ('{0}'.format(bits[i-1]), end = '\t\t')
+            print (bit)

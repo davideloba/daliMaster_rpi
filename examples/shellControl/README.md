@@ -3,30 +3,37 @@
 Here there is a list of commands that you can send to your Raspberry Pi™ by shell in order to control daliMaster Hat.
 
 ## Getting started
-
-Launch *python3 shellControl.py* under *examples/shellControl* folder. Write your command and press return to send it. If you launch the program without arguments, it will show you all available options. Remember that you can send up to 4 arguments each time. The program will echo the received command and if it is correct it will be execute.
-
+Launch *shellControl.py* under *examples/shellControl* folder. Digit your custom daliMaster address as program argument if it is different from default.
+```
+sudo python3 examples/shellControl/shellControl.py [custom I2C address if any]
+```
 ### Hello world
 ```
-daliMaster start..
-i2c master begin..
-device(0x23) is ready!
+I2C DALI master(0x23) begin..
+PING I2C device 0x23..ok
+device 0x23 is ready
+Digit your command (press "Enter" to see all options):
 ```
+At this point, you are asked to send command. Write your command and press return to send it. Remember that you can send up to 4 arguments each time. The program will echo the received command and if it is correct it will be execute.
+
 ### Set new I2C address
 **-a [new address]**  
-Set another I2C address to the daliMaster chip. Values of 128 and more are not accepted.
+Set another I2C address to the daliMaster chip. You can use hex or decimal address. Values of 128(0x80) and more are not accepted.
+#### example
 ```
-python3 shellControl.py
--a 24
-received cmd-> -a,24,,,
-setting 24 as new i2c address to lw14..
-success
+-a 39
+```
+response:
+```
+received commands: [-a][39]
+Setting 39(0x27) as new I2C address
+Ping I2C device 39(0x27)..ok
 done.
 ```
-### Read LW14 register
-**-r [register address]**
+### Read register
+**-r [register name]**
 
-Read LW14 register and echo result. See [LW14 datasheet](http://shop.codemercs.com/media/files_public/okutobbwyxn/LW14_Datasheet.pdf) for more details. Available register to read are:
+Read daliMaster register and echo result. See [LW14 datasheet](http://shop.codemercs.com/media/files_public/okutobbwyxn/LW14_Datasheet.pdf) for more details. Available registers to read are:
 * "status" :
 The status register is one byte that contains the bus status and command status flags:  
 bit
@@ -43,63 +50,103 @@ The command register has two bytes which directly represent the DALI command. Pl
 * "signature" :
 The signature register can be used to identify LW14 and get the revision information for the chips firmware.
 
-#### Register reading example
+#### example
 In this example we will ask ballast its phisicaly minimun level and read the response.
-First do a dummy reading to free previous messagges on "command" register. Do not mind output.
+First of all do a dummy reading to free previous messagge on "command" register. Do not mind output.
 ```
--r 1
+-r command
 ```
-Query lamp with short address 8 with DALI_CMD_QUERY_PHY_MIN code (154).
+Query lamp with Short Address 8 with DALI_QUERY_PHYSICAL_MIN_LEVEL code (154).
 ```
 -q -s 8 154
-received cmd-> -q,-s,8,154,
-query command
-dali telegram --> byte 1: 17(00010001), byte 2: 154(10011010)
-success
-(now you should read Command reg(0x01) to see the response)
+```
+response:
+```
+received commands: [-q][-s][8][154]
+query command function called
+(now you should read command register to see the response)
 done.
 ```
-Now if we read the (0x00) STATUS REGISTER we will find that a reply is available.
+Now if we read the "status" register we will find that a reply is available.
 ```
--r 0
-received cmd-> -r,0,,,
-reading lw14 register..
-(0x00) Status reg: 41 ->bits
-  code  BUS BUSY OVER ERR REPLY TIME 2TEL 1TEL
-  value 0 0 0 0 1 0 0 1
+-r status
+```
+response:
+```
+received commands: [-r][status]
+BUS FAULT         0
+BUSY              0
+OVERRUN           0
+FRAM ERROR        0
+VALID REPLY       1
+REPLY TIMEFRAME   0
+2 BYTE TELEGRAM   0
+1 BYTE TELEGRAM   1
+read:9(00001001)
 done.
 ```
-This register will change quickly after the query in this way.
+This register has changed quickly after the query in this way.
 ```
-code  BUS BUSY OVER ERR REPLY TIME 2TEL 1TEL
-value 0 1 0 0 0 0 0 0
+BUS FAULT         0
+BUSY              1
+OVERRUN           0
+FRAM ERROR        0
+VALID REPLY       0
+REPLY TIMEFRAME   0
+2 BYTE TELEGRAM   0
+1 BYTE TELEGRAM   0
 ```
-Busy = '1' indicates that the last command has not yet been transmitted. Any new command sent to register 1 will be ignored until the last command has been transmitted and the busy bit is cleared.
+BUSY = 1 indicates that the last command has not yet been transmitted. Any new command sent to register 1 will be ignored until the last command has been transmitted and the busy bit is cleared.
 ```
-code  BUS BUSY OVER ERR REPLY TIME 2TEL 1TEL
-value 0 0 0 0 0 1 0 0
+BUS FAULT         0
+BUSY              0
+OVERRUN           0
+FRAM ERROR        0
+VALID REPLY       0
+REPLY TIMEFRAME   1
+2 BYTE TELEGRAM   0
+1 BYTE TELEGRAM   0
 ```
-Time = 1 indicates that the time frame for a reply from the last addressed device has not yet timed out and is reset to zero after 22 Te (see DALI specification) or on bus activity.
+REPLY TIMEFRAME = 1 indicates that the time frame for a reply from the last addressed device has not yet timed out and is reset to zero after 22 Te (see DALI specification) or on bus activity.
 ```
-code  BUS BUSY OVER ERR REPLY TIME 2TEL 1TEL
-value 0 0 0 0 1 0 0 1
+BUS FAULT         0
+BUSY              0
+OVERRUN           0
+FRAM ERROR        0
+VALID REPLY       1
+REPLY TIMEFRAME   0
+2 BYTE TELEGRAM   0
+1 BYTE TELEGRAM   1
 ```
-Valid Reply = 1 if a telegram has been received within 22 Te (see DALI specification) of sending a command. 1Tel = 1 means that 1 byte telegram has been received. The bit is reset on reading register 0x01.
-
-
-So we have a Valid reply and it is a one byte telegram. So read the (0x01) COMMAND REGISTER to get this telegram.  
+Valid Reply = 1 if a telegram has been received within 22 Te (see DALI specification) of sending a command. 1Tel = 1 means that 1 byte telegram has been received. The bit is reset on reading command register.
+So we have a Valid reply and it is a one byte telegram. So read the "command" register to get this telegram.  
 ```
--r 1
-received cmd-> -r,1,,,
-reading lw14 register..
-(0x01) Command reg: 170..0..done.
+-r command
 ```
-So, ballast physical minimum is 170. Notice that even if DALI permits 254 levels, ballast cannot dim light under this value.
-
+response:
+```
+received commands: [-r][command]
+read:170(10101010)
+done.
+```
+So, ballast physical minimum is 170. Notice that even if DALI permits 254 levels, that ballast cannot dim light under this value. Now if you read the status register, you should have all bits equal to 0, nothing left to do.
+```
+received commands: [-r][status]
+BUS FAULT         0
+BUSY              0
+OVERRUN           0
+FRAM ERROR        0
+VALID REPLY       0
+REPLY TIMEFRAME   0
+2 BYTE TELEGRAM   0
+1 BYTE TELEGRAM   0
+read:0(00000000)
+done.
+```
 ### Address
 There are 3 types of addresses:
-* **-s [NUM]** short addresses: as DALI specification, each ballast can be reached with a single address from 0 up to 63. When this short address is not already set, ballast reacts only to broadcast commands. To assign this address see the example.
-* **-g [NUM]** group addresses: from 0 up to 15. *Please refer to the DALI specification for details on the commands*
+* **-s [NUMBER]** short addresses: as DALI specification, each ballast can be reached with a single address from 0 up to 63. When this short address is not already set, ballast reacts only to broadcast commands. To assign this address see the example.
+* **-g [NUMBER]** group addresses: from 0 up to 15. *Please refer to the DALI specification for details on the commands*
 * **-b** broadcast: commands sent with a broadcast address will reach every ballast.
 
 ### DALI forward telegram

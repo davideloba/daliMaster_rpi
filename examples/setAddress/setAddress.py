@@ -1,9 +1,4 @@
-# @Author: davide
-# @Date:   2019-04-25T10:46:54+02:00
-# @Last modified by:   davide
-# @Last modified time: 2019-04-25T15:29:36+02:00
-
-
+#!/usr/bin/python3
 
 import os
 import sys
@@ -13,13 +8,10 @@ import daliMaster
 import defines
 import dali
 
-
-
 master = daliMaster.daliMaster()
 
 if master.begin() == defines.ERROR :
     quit()
-
 
 try:
     userSA = int(input('Digit dali address to set (0-63):'))
