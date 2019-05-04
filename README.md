@@ -96,7 +96,7 @@ Easy, isn't it? Now you can modulate all lamps from 0 up to 254 with those simpl
 
 ## Next
 
-See more informations about shell commands [here](/examples/shellControl/README.MD). See other examples to play with your lamps (try [Pulse.py](/examples/pulse)). See also the following links to know more about DALI and LW14, the chip from which the [daliMaster](https://) is powered by.
+See more informations about shell commands [here](/examples/shellControl/README.MD). See other examples to play with your lamps (try [Pulse.py](/examples/pulse)). See also the following links to know more about [daliMaster](https://) and DALI.
 
 ## Useful links
 

@@ -33,26 +33,17 @@ done.
 ### Read register
 **-r [register name]**
 
-Read daliMaster register and echo result. See [LW14 datasheet](http://shop.codemercs.com/media/files_public/okutobbwyxn/LW14_Datasheet.pdf) for more details. Available registers to read are:
+Read daliMaster register and echo result. Available registers are:
 * "status" :
-The status register is one byte that contains the bus status and command status flags:  
-bit
-7 - Bus Error Status *(0 = Bus OK, 1 = Bus fault)*  
-6 - Busy *(0 = ready, 1 = busy)*  
-5 - Overrun  
-4 - Frame Error  
-3 - Valid Reply  
-2 - Reply Timeframe (*< 22 Te since last command 1 or 2 Byte telegram received*)  
-1 - Two byte telegram received
-0 - One byte telegram received
+The status register is one byte that contains the bus status and command status flags (see further).
 * "command" :
 The command register has two bytes which directly represent the DALI command. Please refer to the DALI specification for details on the commands.
 * "signature" :
-The signature register can be used to identify LW14 and get the revision information for the chips firmware.
+The signature register can be used to identify the I2C chip and get the revision information for the firmware.
 
 #### example
-In this example we will ask ballast its phisicaly minimun level and read the response.
-First of all do a dummy reading to free previous messagge on "command" register. Do not mind output.
+In this example we will ask ballast its physically minimum level and read the response.
+First of all do a dummy reading to free previous message on "command" register. Do not mind output.
 ```
 -r command
 ```
