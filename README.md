@@ -1,6 +1,6 @@
 # daliMaster
 
-This is a Python3 library to control your DALI lamps with the brand new [daliMaster](https://) hat for Raspberry Pi, with built-in DALI bus power supply system. B:boom::boom:m!
+This is a Python3 library to control your DALI lamps with the brand new [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) hat for Raspberry Pi, with built-in DALI bus power supply system. B:boom::boom:m!
 
 Are you looking for Arduino™ library and DALI shield? See [here](https://github.com/davideloba/daliMaster).
 
@@ -16,7 +16,7 @@ Well, the answer is YES.
 
 ### How?
 
-With [daliMaster](https://) hat! As the name suggests, that hat transforms your Raspberry Pi in a DALI master, acting as a bridge between I2C interface and DALI bus. Let's make an example to explain how it works.
+With [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) hat! As the name suggests, that hat transforms your Raspberry Pi in a DALI master, acting as a bridge between I2C interface and DALI bus. Let's make an example to explain how it works.
 
 ## Getting Started
 
@@ -24,13 +24,13 @@ With [daliMaster](https://) hat! As the name suggests, that hat transforms your 
 
 * Turn your Raspberry Pi off.
 
-* Fit [daliMaster](https://) hat on your Raspberry Pi
+* Fit [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) hat on your Raspberry Pi
 
 * Make connections (you can find an example [here](https://))
   * Connect your lamps to their ballasts
   * Connect your ballasts to mains..be careful!
-  * Connect your ballasts and [daliMaster](https://) hat to DALI bus
-  * Connect your 24V DC power supply to mains and to [daliMaster](https://)..again, be careful!
+  * Connect your ballasts and [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) hat to DALI bus
+  * Connect your 24V DC power supply to mains and to [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9)..again, be careful!
 
 * If I'm right, now you should have all lamps on.
 
@@ -64,7 +64,7 @@ and you should see something like that:
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
-If you see '23' (I2C address 0x23), your [daliMaster](https://) is online: well done!
+If you see '23' (I2C address 0x23), your [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) is online: well done!
 
 
 ### Let's do something
@@ -96,7 +96,7 @@ Easy, isn't it? Now you can modulate all lamps from 0 up to 254 with those simpl
 
 ## Next
 
-See more informations about shell commands [here](/examples/shellControl/README.MD). See other examples to play with your lamps (try [Pulse.py](/examples/pulse)). See also the following links to know more about [daliMaster](https://) and DALI.
+See more informations about shell commands [here](/examples/shellControl/README.MD). See other examples to play with your lamps (try [Pulse.py](/examples/pulse)). See also the following links to know more about [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) and DALI.
 
 ## Useful links
 
