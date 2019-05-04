@@ -26,7 +26,7 @@ With [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/25422
 
 * Fit [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) hat on your Raspberry Pi
 
-* Make connections (you can find an example [here](wiring.jpg))
+* Make connections (you can find an example [here](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9))
   * Connect your lamps to their ballasts
   * Connect your ballasts to mains..be careful!
   * Connect your ballasts and [daliMaster](https://www.ebay.it/itm/DALI-Master-hat-for-Raspberry-pi/254220148656?hash=item3b30b39fb0:g:LmwAAOSwNZxczZC9) hat to DALI bus
