@@ -1,6 +1,6 @@
 # daliMaster
 
-This is a Python3 library to control your DALI lamps with the brand new [daliMaster](https://) hat for Raspberry Pi™, with built-in DALI bus power supply system. B:boom::boom:m!
+This is a Python3 library to control your DALI lamps with the brand new [daliMaster](https://) hat for Raspberry Pi, with built-in DALI bus power supply system. B:boom::boom:m!
 
 Are you looking for Arduino™ library and DALI shield? See [here](https://github.com/davideloba/daliMaster).
 
@@ -10,21 +10,21 @@ Are you looking for Arduino™ library and DALI shield? See [here](https://githu
 
 DALI (Digital Addressable Lighting Interface) is a powerful protocol to control lighting. Through DALI you can dimmer your led lamps, ask them status, recall a predefined scenario and so on. If you want more information about DALI you can find many useful links to the bottom of this page.
 
-### Can I use DALI with my Raspberry Pi™?
+### Can I use DALI with my Raspberry Pi?
 
 Well, the answer is YES.
 
 ### How?
 
-With [daliMaster](https://) hat! As the name suggests, that hat transforms your Raspberry Pi™ in a DALI master, acting as a bridge between I2C interface and DALI bus. Let's make an example to explain how it works.
+With [daliMaster](https://) hat! As the name suggests, that hat transforms your Raspberry Pi in a DALI master, acting as a bridge between I2C interface and DALI bus. Let's make an example to explain how it works.
 
 ## Getting Started
 
 ### Hardware stuff
 
-* Turn your Raspberry Pi™ off.
+* Turn your Raspberry Pi off.
 
-* Fit [daliMaster](https://) hat on your Raspberry Pi™
+* Fit [daliMaster](https://) hat on your Raspberry Pi
 
 * Make connections (you can find an example [here](https://))
   * Connect your lamps to their ballasts
@@ -34,11 +34,11 @@ With [daliMaster](https://) hat! As the name suggests, that hat transforms your 
 
 * If I'm right, now you should have all lamps on.
 
-* Turn your Raspberry Pi™ on.
+* Turn your Raspberry Pi on.
 
 ### Software stuff
 
-Enable I2C interface of your Raspberry Pi™
+Enable I2C interface of your Raspberry Pi
 ```
 sudo raspi-config
 ```
@@ -120,7 +120,8 @@ See more informations about shell commands [here](/examples/shellControl/README.
 
 ## Credits
 
-see [credits.md](credits.md) file for details.
+See [credits.md](credits.md) file for details.
+Raspberry Pi is a trademark of the Raspberry Pi Foundation.
 
 ## License
 

@@ -1,6 +1,6 @@
 # shellControl.py
 
-Here there is a list of commands that you can send to your Raspberry Pi™ by shell in order to control daliMaster Hat.
+Here there is a list of commands that you can send to your Raspberry Pi by shell in order to control daliMaster Hat.
 
 ## Getting started
 Launch *shellControl.py* under *examples/shellControl* folder. Digit your custom daliMaster address as program argument if it is different from default.

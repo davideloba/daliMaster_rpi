@@ -1,6 +1,6 @@
 CREDITS
 
-daliMaster library for Raspberry Pi™ hat by [Loba](mailto:davide.loba@gmail.com)
+daliMaster library for Raspberry Pi hat by [Loba](mailto:davide.loba@gmail.com)
 
 Apr 2019
 
