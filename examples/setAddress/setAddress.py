@@ -4,9 +4,11 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 
+import time
 import daliMaster
 import defines
 import dali
+
 
 master = daliMaster.daliMaster()
 
@@ -22,7 +24,6 @@ except ValueError as e:
 
 print("This command will assign {0} as new address with a broadcasted command.".format(userSA))
 print("Be sure that just one ballast will receive it.".format(userSA))
-
 
 res = input('Continue? (digit "Y" for YES)')
 
@@ -59,7 +60,7 @@ if res == "Y" or res == "y" :
         quit("DTR does not match! {0}:{1}").format(regVal, dtr)
 
 
-    print("\n##### DTR and Address match! Now save as new address #####")
+    print("\n##### DTR and Address match! Now save it as new address #####")
 
     if master.configCmd(broadcastAddr, dali.DALI_DTR_AS_SHORT_ADDRESS) == defines.ERROR :
         quit()

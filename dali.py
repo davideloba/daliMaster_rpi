@@ -1,10 +1,3 @@
-# @Author: davide
-# @Date:   2018-02-17T17:36:04+01:00
-# @Last modified by:   davide
-# @Last modified time: 2019-04-13T11:33:09+02:00
-
-
-
 # DALI TELEGRAM
 #
 # 1 start bit

@@ -1,9 +1,4 @@
-# @Author: davide
-# @Date:   2018-02-18T10:54:08+01:00
-# @Last modified by:   davide
-# @Last modified time: 2019-04-25T15:26:53+02:00
-
-
+#!/usr/bin/python3
 
 import os
 import sys
@@ -16,7 +11,7 @@ import time
 
 
 DALISA = 7 #set your ballast address
-LEVEL = 254 #set wanted level
+LEVEL = 254 #set level
 
 master = daliMaster.daliMaster()
 

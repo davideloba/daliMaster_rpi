@@ -1,9 +1,3 @@
-# @Author: davide
-# @Date:   2018-02-17T14:29:24+01:00
-# @Last modified by:   davide
-# @Last modified time: 2019-04-25T12:15:18+02:00
-
-
 # default I2C address
 LW14_I2C_ADDRESS            = 0x23
 

@@ -174,7 +174,7 @@ class daliMaster:
 
     def configCmd(self, ballast, cmd):
 
-        print("config command function called")
+        print("config command function called ({0},{1})".format(ballast,cmd))
 
         try:
             self.checkRange(cmd, 32, 128)
@@ -191,10 +191,10 @@ class daliMaster:
 
     def queryCmd(self, ballast, cmd):
 
-        print("query command function called")
+        print("query command function called ({0},{1})".format(ballast,cmd))
 
         try:
-            self.checkRange(cmd, 144, 255)
+            self.checkRange(cmd, 144, 196)
             self.__write(ballast, cmd)
         except ValueError as e:
             print(e.args)
@@ -208,10 +208,10 @@ class daliMaster:
 
     def specialCmd(self, cmd_1, cmd_2):
 
-        print("special command function called")
+        print("special command function called ({0},{1})".format(cmd_1,cmd_2))
 
         try:
-            # self.checkRange(cmd, 144, 255)
+            # self.checkRange(cmd, 161, 255)
             self.__write(cmd_1, cmd_2)
             return True
         except ValueError as e:
@@ -371,3 +371,4 @@ class daliMaster:
                 bit = 1
             print ('{0}'.format(bits[i-1]), end = '\t\t')
             print (bit)
+        print("++++++++++++++++++++++++++")
