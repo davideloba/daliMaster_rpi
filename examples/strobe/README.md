@@ -1,0 +1,3 @@
+# strobe.py
+
+**Disco strobe**
