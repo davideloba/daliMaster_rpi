@@ -21,9 +21,9 @@ while 1:
 
     if (master.waitForReady() == defines.ERROR) or (master.indirectCmd(daliAddress, dali.DALI_OFF) == defines.ERROR) :
         print("Error..")
-    time.sleep(0.1)
+    time.sleep(0.2)
 
 
     if (master.waitForReady() == defines.ERROR) or (master.indirectCmd(daliAddress, dali.DALI_MAX_LEVEL) == defines.ERROR) :
         print("Error..")
-    time.sleep(0.1)
+    time.sleep(0.2)
